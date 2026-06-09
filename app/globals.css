@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────────────
+   THEME TOKENS — auto-adapt to prefers-color-scheme
+   ───────────────────────────────────────────────────────────── */
+:root {
+  --blue: #4285F4;
+  --red: #EA4335;
+  --yellow: #FBBC04;
+  --green: #34A853;
+  --purple: #7C6EF5;
+  --cyan: #22D3EE;
+
+  /* Light surfaces */
+  --bg: #ffffff;
+  --bg-alt: #F7F9FC;
+  --bg-muted: #EEF2F8;
+  --surface: #ffffff;
+  --border-soft: rgba(0, 0, 0, 0.07);
+  --border-mid: rgba(0, 0, 0, 0.12);
+  --text: #0A0F1E;
+  --text-sec: #4A5568;
+  --text-muted: #94A3B8;
+  --code-bg: #0B1020;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #08091A;
+    --bg-alt: #0F1226;
+    --bg-muted: #161A33;
+    --surface: #11142B;
+    --border-soft: rgba(255, 255, 255, 0.08);
+    --border-mid: rgba(255, 255, 255, 0.16);
+    --text: #F4F6FF;
+    --text-sec: #B6BDD3;
+    --text-muted: #7A8299;
+    --code-bg: #060713;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-alt);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #4285F4, #7C6EF5);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3a76e8;
+}
+
+/* Selection */
+::selection {
+  background: #4285F4;
+  color: #ffffff;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   UTILITY CLASSES
+   ───────────────────────────────────────────────────────────── */
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full bg-brand-blue-lt px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-blue ring-1 ring-brand-blue/10
+           sm:px-4 sm:py-1.5 sm:text-xs sm:tracking-[0.18em]
+           dark:bg-brand-blue/10 dark:text-blue-300 dark:ring-brand-blue/25;
+  }
+  .section-title {
+    @apply font-display text-[28px] font-bold leading-[1.12] tracking-tight text-ink sm:text-4xl md:text-5xl lg:text-6xl dark:text-white;
+  }
+  .section-sub {
+    @apply mt-4 max-w-2xl text-sm leading-relaxed text-ink-sec sm:mt-5 sm:text-base md:text-lg dark:text-slate-300;
+  }
+  .section-pad {
+    @apply py-16 sm:py-20 md:py-24 lg:py-28;
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-brand-blue via-brand-purple to-brand-cyan bg-clip-text text-transparent;
+  }
+  .btn-primary {
+    @apply inline-flex min-h-[44px] items-center gap-2 rounded-full bg-gradient-to-r from-brand-blue to-brand-purple px-5 py-3 text-sm font-semibold text-white shadow-brand-blue transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift sm:px-7 sm:py-3.5;
+  }
+  .btn-ghost {
+    @apply inline-flex min-h-[44px] items-center gap-2 rounded-full border border-black/10 bg-white px-5 py-3 text-sm font-semibold text-ink transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-blue hover:text-brand-blue hover:shadow-soft sm:px-7 sm:py-3.5
+           dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10 dark:hover:text-blue-300;
+  }
+  .card-soft {
+    @apply rounded-2xl border border-black/[0.06] bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card
+           dark:border-white/10 dark:bg-white/5 dark:shadow-none dark:hover:bg-white/[0.07];
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full bg-surface-alt px-2.5 py-1 text-[11px] font-medium text-ink-sec sm:px-3 sm:text-xs
+           dark:bg-white/5 dark:text-slate-300;
+  }
+}
+
+/* Marquee scroll */
+.marquee-track {
+  display: flex;
+  gap: 3rem;
+  animation: marquee 30s linear infinite;
+  width: max-content;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Blob backgrounds */
+.blob-bg {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+}
+@media (prefers-color-scheme: dark) {
+  .blob-bg { opacity: 0.35; }
+}
+
+/* Underline grow */
+.uline {
+  position: relative;
+}
+.uline::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -3px;
+  height: 2px; width: 0;
+  background: currentColor;
+  transition: width .35s ease;
+}
+.uline:hover::after { width: 100%; }
+
+/* Dotted grid bg */
+.dot-grid {
+  background-image: radial-gradient(rgba(10,15,30,0.10) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+@media (prefers-color-scheme: dark) {
+  .dot-grid {
+    background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+  }
+}
+
+/* Section reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Form */
+.field {
+  @apply w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink-muted shadow-sm transition focus:border-brand-blue focus:ring-4 focus:ring-brand-blue/15 sm:text-sm
+         dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-slate-500 dark:shadow-none dark:focus:border-brand-blue dark:focus:ring-brand-blue/30;
+}
+.field-label {
+  @apply mb-2 block text-[11px] font-semibold uppercase tracking-wider text-ink-sec sm:text-xs dark:text-slate-400;
+}
+
+/* Hide native cursor on the floating dot when over body */
+.no-tap-highlight { -webkit-tap-highlight-color: transparent; }
+
+/* Horizontal scrollers with hidden scrollbar */
+.h-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.h-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Theme-aware surface helpers used by sections */
+.bg-surface-page { background-color: var(--bg); }
+.bg-surface-alt2 { background-color: var(--bg-alt); }
+
+/* Auto-tinted edges for marquee / scrollers in dark mode */
+.fade-edge-l { background: linear-gradient(to right, var(--bg), transparent); }
+.fade-edge-r { background: linear-gradient(to left, var(--bg), transparent); }
+.fade-edge-l-alt { background: linear-gradient(to right, var(--bg-alt), transparent); }
+.fade-edge-r-alt { background: linear-gradient(to left, var(--bg-alt), transparent); }
