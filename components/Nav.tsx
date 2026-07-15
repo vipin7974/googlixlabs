@@ -43,7 +43,7 @@ export default function Nav() {
       }}
     >
       <a
-        href="#top"
+        href="/#top"
         data-cursor
         aria-label="GooglixLabs home"
         style={{ display: "flex", alignItems: "center", gap: 11 }}
@@ -88,7 +88,7 @@ export default function Nav() {
       </div>
 
       <a
-        href="#contact"
+        href="/#contact"
         data-cursor
         data-magnetic
         className="gx-nav-cta"

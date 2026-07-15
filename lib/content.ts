@@ -9,10 +9,11 @@ export const ACCENTS = {
 export type AccentName = keyof typeof ACCENTS;
 
 export const navLinks = [
-  { label: "Studio", href: "#studio" },
-  { label: "Work", href: "#work" },
-  { label: "Capabilities", href: "#capabilities" },
-  { label: "Contact", href: "#contact" },
+  { label: "Studio", href: "/#studio" },
+  { label: "Work", href: "/#work" },
+  { label: "Capabilities", href: "/#capabilities" },
+  { label: "Play", href: "/play" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export const heroStats = [
