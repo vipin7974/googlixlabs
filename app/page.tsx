@@ -1,38 +1,30 @@
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import ScrollControls from "@/components/ScrollControls";
+import Nav from "@/components/Nav";
+import Interactions from "@/components/Interactions";
 
 import Hero from "@/components/sections/Hero";
-import TrustBar from "@/components/sections/TrustBar";
-import Stats from "@/components/sections/Stats";
-import Services from "@/components/sections/Services";
-import About from "@/components/sections/About";
-import Projects from "@/components/sections/Projects";
-import Process from "@/components/sections/Process";
-import Testimonials from "@/components/sections/Testimonials";
-import Faq from "@/components/sections/Faq";
-import Contact from "@/components/sections/Contact";
-import Cta from "@/components/sections/Cta";
+import Marquee from "@/components/sections/Marquee";
+import Studio from "@/components/sections/Studio";
+import Work from "@/components/sections/Work";
+import Capabilities from "@/components/sections/Capabilities";
+import Approach from "@/components/sections/Approach";
+import ContactFooter from "@/components/sections/ContactFooter";
+
+const ACCENT = "#2B5CFF";
 
 export default function HomePage() {
   return (
     <>
-      <Navbar />
+      <Nav />
       <main>
-        <Hero />
-        <TrustBar />
-        <Stats />
-        <Services />
-        <About />
-        <Projects />
-        <Process />
-        <Testimonials />
-        <Faq />
-        <Contact />
-        <Cta />
+        <Hero accent={ACCENT} />
+        <Marquee />
+        <Studio />
+        <Work accent={ACCENT} />
+        <Capabilities />
+        <Approach />
+        <ContactFooter />
       </main>
-      <Footer />
-      <ScrollControls />
+      <Interactions />
     </>
   );
 }

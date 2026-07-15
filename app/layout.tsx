@@ -1,105 +1,178 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, DM_Sans } from "next/font/google";
-import { Toaster } from "sonner";
+import { Bricolage_Grotesque, Instrument_Serif, Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-bricolage",
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-const dmSans = DM_Sans({
+const instrument = Instrument_Serif({
   subsets: ["latin"],
-  variable: "--font-dmsans",
-  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-instrument",
+  weight: ["400"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: ["400", "500"],
   display: "swap",
 });
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  colorScheme: "light dark",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#08091A" },
-  ],
+  colorScheme: "light",
+  themeColor: "#16171A",
 };
 
+const siteUrl = "https://googlixlabs.com";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://googlixlabs.com"),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "GooglixLabs — Intelligent Digital Experiences",
+    default: "GooglixLabs — Digital Product Studio | Web, Design & AI Development in Raipur",
     template: "%s · GooglixLabs",
   },
   description:
-    "GooglixLabs builds intelligent, scalable, and visually stunning digital products. Full Stack Development, UI/UX Design, AI Solutions, SaaS & Mobile Apps — from Raipur, India for the world.",
+    "GooglixLabs is a digital product studio in Raipur, India, building intelligent web apps, SaaS platforms, AI products and brand identities for clients worldwide — from first sketch to global scale.",
   keywords: [
+    "digital product studio",
+    "web development company Raipur",
+    "web app development India",
+    "UI UX design agency",
+    "applied AI development",
+    "AI product development company",
+    "SaaS platform development",
+    "custom software development Chhattisgarh",
+    "brand identity design",
     "GooglixLabs",
-    "Web Development",
-    "Next.js Agency",
-    "AI Solutions",
-    "SaaS Development",
-    "UI/UX Design",
-    "Mobile App Development",
-    "Pharma software",
-    "Inventory management software",
-    "Hexalin Pharmaceuticals",
-    "WeWakeIndiGreen",
   ],
-  authors: [{ name: "GooglixLabs" }],
+  authors: [{ name: "GooglixLabs", url: siteUrl }],
   creator: "GooglixLabs",
   publisher: "GooglixLabs",
-  icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.svg", sizes: "32x32", type: "image/svg+xml" },
-    ],
-    shortcut: "/favicon.svg",
-    apple: "/favicon.svg",
+  category: "technology",
+  formatDetection: { email: false, address: false, telephone: false },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
+  alternates: { canonical: "/" },
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
+  manifest: "/manifest.webmanifest",
   openGraph: {
     type: "website",
-    title: "GooglixLabs — Intelligent Digital Experiences",
+    locale: "en_US",
+    title: "GooglixLabs — Digital Product Studio",
     description:
-      "We design and engineer intelligent digital products — full stack web, AI tools, SaaS, mobile apps and pixel-perfect UI/UX.",
+      "We design and engineer intelligent web apps, SaaS platforms and AI products — from first sketch to global scale.",
+    url: "/",
     siteName: "GooglixLabs",
-    images: [{ url: "/og-image.svg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "GooglixLabs — Intelligent Digital Experiences",
-    description:
-      "Full Stack · AI · UI/UX · SaaS · Mobile. We turn complex ideas into products people love.",
-    images: ["/og-image.svg"],
+    title: "GooglixLabs — Digital Product Studio",
+    description: "Intelligent web, design & AI products. From Raipur, for the world.",
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["Organization", "ProfessionalService"],
+      "@id": `${siteUrl}/#organization`,
+      name: "GooglixLabs",
+      url: siteUrl,
+      logo: { "@type": "ImageObject", url: `${siteUrl}/favicon.svg` },
+      image: `${siteUrl}/opengraph-image`,
+      description:
+        "Digital product studio designing and engineering intelligent web apps, SaaS platforms, AI products and brand identities.",
+      email: "googlixlabs@gmail.com",
+      telephone: "+91-70004-98574",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Raipur",
+        addressRegion: "Chhattisgarh",
+        addressCountry: "IN",
+      },
+      areaServed: "Worldwide",
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        email: "googlixlabs@gmail.com",
+        telephone: "+91-70004-98574",
+        areaServed: "Worldwide",
+        availableLanguage: ["English", "Hindi"],
+      },
+      knowsAbout: [
+        "Web & App Engineering",
+        "Product & UX Design",
+        "Applied AI",
+        "SaaS Platforms",
+        "Brand & Identity",
+      ],
+      sameAs: [
+        "https://www.linkedin.com/company/googlixlabs",
+        "https://x.com/googlixlabs",
+        "https://github.com/googlixlabs",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: "GooglixLabs",
+      inLanguage: "en",
+      publisher: { "@id": `${siteUrl}/#organization` },
+    },
+  ],
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${bricolage.variable} ${dmSans.variable}`}
-      style={{ colorScheme: "light dark" }}
+      className={`${bricolage.variable} ${instrument.variable} ${manrope.variable} ${jetbrainsMono.variable}`}
+      style={{ colorScheme: "light" }}
     >
-      <body className="font-sans antialiased no-tap-highlight bg-white text-ink dark:bg-[#08091A] dark:text-white">
-        {children}
-        <Toaster
-          position="top-center"
-          richColors
-          closeButton
-          theme="system"
-          toastOptions={{
-            classNames: {
-              toast: "font-sans",
-            },
-          }}
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+      </head>
+      <body
+        style={{
+          margin: 0,
+          fontFamily: "var(--font-manrope), sans-serif",
+          WebkitFontSmoothing: "antialiased",
+          MozOsxFontSmoothing: "grayscale",
+        }}
+      >
+        {children}
       </body>
     </html>
   );

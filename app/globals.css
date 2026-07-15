@@ -3,209 +3,227 @@
 @tailwind utilities;
 
 /* ─────────────────────────────────────────────────────────────
-   THEME TOKENS — auto-adapt to prefers-color-scheme
+   GooglixLabs — Digital Product Studio
+   Ported 1:1 from the supplied design (GooglixLabs Studio.dc.html)
    ───────────────────────────────────────────────────────────── */
 :root {
-  --blue: #4285F4;
-  --red: #EA4335;
-  --yellow: #FBBC04;
-  --green: #34A853;
-  --purple: #7C6EF5;
-  --cyan: #22D3EE;
-
-  /* Light surfaces */
-  --bg: #ffffff;
-  --bg-alt: #F7F9FC;
-  --bg-muted: #EEF2F8;
-  --surface: #ffffff;
-  --border-soft: rgba(0, 0, 0, 0.07);
-  --border-mid: rgba(0, 0, 0, 0.12);
-  --text: #0A0F1E;
-  --text-sec: #4A5568;
-  --text-muted: #94A3B8;
-  --code-bg: #0B1020;
+  --paper: #f4f3ee;
+  --ink: #17181b;
+  --muted: #77776f;
+  --faint: #a6a69d;
+  --accent: #2b5cff;
+  --line: rgba(23, 24, 27, 0.13);
+  --line2: rgba(23, 24, 27, 0.07);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #08091A;
-    --bg-alt: #0F1226;
-    --bg-muted: #161A33;
-    --surface: #11142B;
-    --border-soft: rgba(255, 255, 255, 0.08);
-    --border-mid: rgba(255, 255, 255, 0.16);
-    --text: #F4F6FF;
-    --text-sec: #B6BDD3;
-    --text-muted: #7A8299;
-    --code-bg: #060713;
-  }
+* {
+  box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-html,
 body {
-  background: var(--bg);
-  color: var(--text);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+a {
+  color: inherit;
+  text-decoration: none;
 }
-::-webkit-scrollbar-track {
-  background: var(--bg-alt);
-}
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #4285F4, #7C6EF5);
-  border-radius: 8px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #3a76e8;
+a:hover {
+  color: var(--accent);
 }
 
-/* Selection */
 ::selection {
-  background: #4285F4;
-  color: #ffffff;
+  background: var(--ink);
+  color: var(--paper);
 }
 
-/* ─────────────────────────────────────────────────────────────
-   UTILITY CLASSES
-   ───────────────────────────────────────────────────────────── */
-@layer components {
-  .container-x {
-    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12;
-  }
-  .eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full bg-brand-blue-lt px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-blue ring-1 ring-brand-blue/10
-           sm:px-4 sm:py-1.5 sm:text-xs sm:tracking-[0.18em]
-           dark:bg-brand-blue/10 dark:text-blue-300 dark:ring-brand-blue/25;
-  }
-  .section-title {
-    @apply font-display text-[28px] font-bold leading-[1.12] tracking-tight text-ink sm:text-4xl md:text-5xl lg:text-6xl dark:text-white;
-  }
-  .section-sub {
-    @apply mt-4 max-w-2xl text-sm leading-relaxed text-ink-sec sm:mt-5 sm:text-base md:text-lg dark:text-slate-300;
-  }
-  .section-pad {
-    @apply py-16 sm:py-20 md:py-24 lg:py-28;
-  }
-  .gradient-text {
-    @apply bg-gradient-to-r from-brand-blue via-brand-purple to-brand-cyan bg-clip-text text-transparent;
-  }
-  .btn-primary {
-    @apply inline-flex min-h-[44px] items-center gap-2 rounded-full bg-gradient-to-r from-brand-blue to-brand-purple px-5 py-3 text-sm font-semibold text-white shadow-brand-blue transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift sm:px-7 sm:py-3.5;
-  }
-  .btn-ghost {
-    @apply inline-flex min-h-[44px] items-center gap-2 rounded-full border border-black/10 bg-white px-5 py-3 text-sm font-semibold text-ink transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-blue hover:text-brand-blue hover:shadow-soft sm:px-7 sm:py-3.5
-           dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10 dark:hover:text-blue-300;
-  }
-  .card-soft {
-    @apply rounded-2xl border border-black/[0.06] bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card
-           dark:border-white/10 dark:bg-white/5 dark:shadow-none dark:hover:bg-white/[0.07];
-  }
-  .chip {
-    @apply inline-flex items-center gap-1.5 rounded-full bg-surface-alt px-2.5 py-1 text-[11px] font-medium text-ink-sec sm:px-3 sm:text-xs
-           dark:bg-white/5 dark:text-slate-300;
+@media (pointer: fine) {
+  .gx-cn,
+  .gx-cn * {
+    cursor: none !important;
   }
 }
 
-/* Marquee scroll */
-.marquee-track {
-  display: flex;
-  gap: 3rem;
-  animation: marquee 30s linear infinite;
-  width: max-content;
+@keyframes gxMq {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+@keyframes gxBlink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
 }
-
-/* Blob backgrounds */
-.blob-bg {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(80px);
-  opacity: 0.55;
-  pointer-events: none;
-  z-index: 0;
+@keyframes gxSpin3d {
+  from {
+    transform: rotateX(-24deg) rotateY(0);
+  }
+  to {
+    transform: rotateX(-24deg) rotateY(360deg);
+  }
 }
-@media (prefers-color-scheme: dark) {
-  .blob-bg { opacity: 0.35; }
-}
-
-/* Underline grow */
-.uline {
-  position: relative;
-}
-.uline::after {
-  content: "";
-  position: absolute;
-  left: 0; bottom: -3px;
-  height: 2px; width: 0;
-  background: currentColor;
-  transition: width .35s ease;
-}
-.uline:hover::after { width: 100%; }
-
-/* Dotted grid bg */
-.dot-grid {
-  background-image: radial-gradient(rgba(10,15,30,0.10) 1px, transparent 1px);
-  background-size: 22px 22px;
-}
-@media (prefers-color-scheme: dark) {
-  .dot-grid {
-    background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+@keyframes gxFloat3d {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
   }
 }
 
-/* Section reveal */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity .8s ease, transform .8s ease;
+.gx-mask {
+  overflow: hidden;
+  display: block;
 }
-.reveal.in {
-  opacity: 1;
+.gx-mask > span {
+  display: block;
+  transform: translateY(115%);
+  transition: transform 1.05s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.gx-shown .gx-mask > span,
+.gx-mask.gx-shown > span {
   transform: translateY(0);
 }
 
-/* Form */
-.field {
-  @apply w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink-muted shadow-sm transition focus:border-brand-blue focus:ring-4 focus:ring-brand-blue/15 sm:text-sm
-         dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-slate-500 dark:shadow-none dark:focus:border-brand-blue dark:focus:ring-brand-blue/30;
+[data-fade] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1), transform 1s cubic-bezier(0.19, 1, 0.22, 1);
 }
-.field-label {
-  @apply mb-2 block text-[11px] font-semibold uppercase tracking-wider text-ink-sec sm:text-xs dark:text-slate-400;
+[data-fade].gx-shown {
+  opacity: 1;
+  transform: none;
 }
 
-/* Hide native cursor on the floating dot when over body */
-.no-tap-highlight { -webkit-tap-highlight-color: transparent; }
-
-/* Horizontal scrollers with hidden scrollbar */
-.h-scroll {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+input,
+textarea,
+select {
+  font-family: inherit;
 }
-.h-scroll::-webkit-scrollbar {
+
+/* ─────────────────────────────────────────────────────────────
+   Responsive layout swaps (declarative CSS replacement for the
+   original design's JS-driven initResponsive())
+   ───────────────────────────────────────────────────────────── */
+.gx-navlinks {
   display: none;
 }
+@media (min-width: 861px) {
+  .gx-navlinks {
+    display: flex;
+  }
+}
 
-/* Theme-aware surface helpers used by sections */
-.bg-surface-page { background-color: var(--bg); }
-.bg-surface-alt2 { background-color: var(--bg-alt); }
+.gx-manifesto-grid {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 801px) {
+  .gx-manifesto-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
-/* Auto-tinted edges for marquee / scrollers in dark mode */
-.fade-edge-l { background: linear-gradient(to right, var(--bg), transparent); }
-.fade-edge-r { background: linear-gradient(to left, var(--bg), transparent); }
-.fade-edge-l-alt { background: linear-gradient(to right, var(--bg-alt), transparent); }
-.fade-edge-r-alt { background: linear-gradient(to left, var(--bg-alt), transparent); }
+.gx-approach-grid {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 561px) {
+  .gx-approach-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 901px) {
+  .gx-approach-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.gx-foot-grid {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 721px) {
+  .gx-foot-grid {
+    grid-template-columns: 1.4fr 1fr 1fr;
+  }
+}
+
+.gx-cube-wrap {
+  display: none;
+}
+@media (min-width: 841px) {
+  .gx-cube-wrap {
+    display: block;
+  }
+}
+
+/* Custom cursor elements are hidden until JS activates them on
+   fine-pointer devices (initCursor sets opacity via style attr) */
+#cursor-dot,
+#cursor-ring {
+  opacity: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Hover states (the source design used a preview-tool-only
+   "style-hover" attribute; these are the real CSS equivalents)
+   ───────────────────────────────────────────────────────────── */
+.gx-nav-link {
+  color: var(--muted);
+  transition: color 0.2s;
+}
+.gx-nav-link:hover {
+  color: var(--ink);
+}
+
+.gx-nav-cta {
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+.gx-nav-cta:hover {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.gx-hero-arrow {
+  transition: background 0.3s, color 0.3s;
+}
+.gx-hero-arrow:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.gx-work-row {
+  transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1), transform 1s cubic-bezier(0.19, 1, 0.22, 1),
+    padding-left 0.4s, color 0.3s;
+}
+.gx-work-row:hover {
+  padding-left: 22px;
+  color: #fff;
+}
+
+.gx-cap-row {
+  transition: background 0.35s;
+}
+.gx-cap-row:hover {
+  background: rgba(23, 24, 27, 0.03);
+}
+
+.gx-social-link {
+  transition: color 0.2s;
+}
+.gx-social-link:hover {
+  color: #fff;
+}

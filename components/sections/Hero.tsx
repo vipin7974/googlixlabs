@@ -1,93 +1,182 @@
-"use client";
+import FlowCanvas from "@/components/FlowCanvas";
+import { heroStats } from "@/lib/content";
 
-import { ArrowUpRight, ArrowRight, Sparkles, Zap, Bot, Palette, Cloud, Smartphone } from "lucide-react";
-
-// Floating chips are positioned within the Hero section. We avoid the top 96px
-// (navbar height + breathing room) and the center text column, so they decorate
-// the left/right edges without overlapping content.
-const chips = [
-  { label: "Next.js 15",   Icon: Zap,        color: "from-brand-blue/15 to-brand-purple/15 text-brand-blue",    pos: "left-[4%]  top-[28%]" },
-  { label: "AI Powered",   Icon: Bot,        color: "from-brand-green/15 to-brand-cyan/15 text-emerald-600",   pos: "right-[4%] top-[24%]" },
-  { label: "UI/UX Design", Icon: Palette,    color: "from-brand-red/15 to-brand-yellow/15 text-brand-red",      pos: "left-[6%]  bottom-[22%]" },
-  { label: "Cloud Native", Icon: Cloud,      color: "from-brand-yellow/20 to-brand-red/15 text-amber-600",      pos: "right-[6%] bottom-[20%]" },
-  { label: "Mobile First", Icon: Smartphone, color: "from-brand-purple/15 to-brand-blue/15 text-brand-purple",  pos: "left-[8%]  top-[55%]" },
-];
-
-export default function Hero() {
+export default function Hero({ accent = "#2B5CFF" }: { accent?: string }) {
   return (
-    <section
-      id="hero"
-      className="relative isolate overflow-hidden bg-soft-radial pt-24 pb-16 sm:pt-32 sm:pb-24 md:pt-36 md:pb-28 lg:pt-40 lg:pb-32"
+    <header
+      id="top"
+      style={{
+        position: "relative",
+        zIndex: 2,
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        padding: "140px clamp(20px,5vw,60px) 70px",
+      }}
     >
-      {/* Decorative blobs */}
-      <div className="blob-bg left-[-10%] top-[10%] h-80 w-80 bg-brand-blue/35" />
-      <div className="blob-bg right-[-10%] top-[20%] h-96 w-96 bg-brand-red/25" />
-      <div className="blob-bg left-[30%] bottom-[-10%] h-72 w-72 bg-brand-yellow/25" />
+      <FlowCanvas accent={accent} />
 
-      {/* Floating chips */}
-      <div className="pointer-events-none absolute inset-0 hidden lg:block">
-        {chips.map((c) => (
-          <div
-            key={c.label}
-            className={`absolute ${c.pos} animate-float`}
-            style={{ animationDelay: `${Math.random() * 2}s` }}
-          >
-            <div
-              className={`flex items-center gap-2 rounded-full border border-black/5 bg-gradient-to-br ${c.color} bg-white/85 px-4 py-2 text-xs font-semibold shadow-card backdrop-blur dark:border-white/10 dark:bg-white/10`}
+      {/* content sits in its own stacking context, above the flow canvas */}
+      <div style={{ position: "relative", zIndex: 1 }}>
+        <div style={{ maxWidth: 1300, margin: "0 auto", width: "100%" }}>
+          <div data-fade style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 38 }}>
+            <span
+              style={{
+                width: 7,
+                height: 7,
+                borderRadius: "50%",
+                background: "var(--accent)",
+                animation: "gxBlink 2.4s infinite",
+              }}
+            />
+            <span
+              style={{
+                fontFamily: "var(--font-mono), monospace",
+                fontSize: 12,
+                letterSpacing: ".06em",
+                textTransform: "uppercase",
+                color: "var(--muted)",
+              }}
             >
-              <c.Icon size={14} />
-              {c.label}
-            </div>
+              Digital product studio — Raipur, IN
+            </span>
           </div>
-        ))}
+
+          <h1
+            style={{
+              fontFamily: "var(--font-bricolage), sans-serif",
+              fontWeight: 600,
+              fontSize: "clamp(2.9rem,10vw,9rem)",
+              lineHeight: 0.92,
+              letterSpacing: "-.04em",
+              color: "var(--ink)",
+              margin: 0,
+            }}
+          >
+            <span className="gx-mask">
+              <span>We design &amp;</span>
+            </span>
+            <span className="gx-mask">
+              <span>
+                engineer{" "}
+                <span
+                  style={{
+                    fontFamily: "var(--font-instrument), serif",
+                    fontWeight: 400,
+                    fontStyle: "italic",
+                    letterSpacing: "-.01em",
+                  }}
+                >
+                  intelligent
+                </span>
+              </span>
+            </span>
+            <span className="gx-mask">
+              <span>digital products.</span>
+            </span>
+          </h1>
+
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "flex-end",
+              justifyContent: "space-between",
+              gap: 30,
+              marginTop: "clamp(40px,6vw,72px)",
+            }}
+          >
+            <p
+              data-fade
+              style={{
+                fontFamily: "var(--font-manrope), sans-serif",
+                fontSize: "clamp(1rem,1.5vw,1.22rem)",
+                lineHeight: 1.55,
+                color: "var(--ink)",
+                maxWidth: "44ch",
+                margin: 0,
+              }}
+            >
+              A small studio pairing modern engineering with applied AI — building web apps, SaaS
+              platforms and brands that feel effortless and scale without limits.
+            </p>
+            <a
+              href="#work"
+              data-cursor
+              data-magnetic
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 10,
+                fontFamily: "var(--font-mono), monospace",
+                fontSize: 13,
+                letterSpacing: ".03em",
+                color: "var(--ink)",
+                whiteSpace: "nowrap",
+              }}
+            >
+              <span
+                className="gx-hero-arrow"
+                style={{
+                  width: 46,
+                  height: 46,
+                  borderRadius: "50%",
+                  border: "1px solid var(--line)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 15,
+                }}
+              >
+                ↓
+              </span>
+              Selected work
+            </a>
+          </div>
+        </div>
+
+        <div
+          data-fade
+          style={{
+            maxWidth: 1300,
+            margin: "clamp(48px,7vw,90px) auto 0",
+            width: "100%",
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "clamp(24px,5vw,72px)",
+            borderTop: "1px solid var(--line)",
+            paddingTop: 26,
+          }}
+        >
+          {heroStats.map((s) => (
+            <div key={s.label} style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
+              <span
+                style={{
+                  fontFamily: "var(--font-bricolage), sans-serif",
+                  fontWeight: 600,
+                  fontSize: "clamp(1.4rem,2.4vw,2rem)",
+                  letterSpacing: "-.03em",
+                  color: "var(--ink)",
+                }}
+              >
+                <span data-count={s.target}>0</span>
+                {s.suffix}
+              </span>
+              <span
+                style={{
+                  fontFamily: "var(--font-mono), monospace",
+                  fontSize: 11.5,
+                  color: "var(--muted)",
+                  maxWidth: "16ch",
+                }}
+              >
+                {s.label}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
-
-      <div className="container-x relative z-10 text-center">
-        {/* Badge */}
-        <div className="mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-black/5 bg-white/90 px-3 py-1.5 text-[11px] font-medium shadow-soft backdrop-blur sm:mb-7 sm:gap-3 sm:px-4 sm:py-2 sm:text-xs dark:border-white/10 dark:bg-white/[0.06]">
-          <span className="relative grid h-2 w-2 flex-shrink-0 place-items-center">
-            <span className="absolute inset-0 animate-pulse-dot rounded-full bg-brand-green" />
-            <span className="relative h-2 w-2 rounded-full bg-brand-green" />
-          </span>
-          <span className="text-ink dark:text-white">Available for Projects</span>
-          <span className="hidden h-3 w-px bg-black/10 dark:bg-white/15 sm:block" />
-          <span className="hidden text-ink-sec dark:text-slate-300 sm:inline">50+ Products Shipped</span>
-        </div>
-
-        {/* H1 */}
-        <h1 className="font-display text-[36px] font-extrabold leading-[1.08] tracking-tight text-ink dark:text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-[88px]">
-          Building Intelligent
-          <br />
-          <span className="gradient-text">Digital Experiences</span>
-        </h1>
-
-        {/* Sub */}
-        <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-ink-sec dark:text-slate-300 sm:mt-7 sm:text-lg md:text-xl">
-          Full Stack Development, UI/UX Design &amp; AI Solutions for modern
-          businesses. We turn complex ideas into products people love.
-        </p>
-
-        {/* CTAs */}
-        <div className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:mt-10 sm:flex-row sm:items-center sm:gap-4">
-          <a href="#contact" className="btn-primary group justify-center">
-            Start a Project
-            <ArrowUpRight size={16} className="transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
-          <a href="#projects" className="btn-ghost group justify-center">
-            View Our Work
-            <ArrowRight size={16} className="transition group-hover:translate-x-1" />
-          </a>
-        </div>
-
-        {/* Sparkle stat row */}
-        <div className="mx-auto mt-10 flex max-w-3xl flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-ink-sec dark:text-slate-300 sm:mt-16 sm:gap-x-10 sm:gap-y-4 sm:text-sm">
-          <div className="flex items-center gap-1.5 sm:gap-2"><Sparkles size={12} className="text-brand-blue sm:hidden" /><Sparkles size={14} className="hidden text-brand-blue sm:block" /> 50+ Products</div>
-          <div className="hidden h-3 w-px bg-black/10 dark:bg-white/15 sm:block" />
-          <div className="flex items-center gap-1.5 sm:gap-2"><Sparkles size={12} className="text-brand-red sm:hidden" /><Sparkles size={14} className="hidden text-brand-red sm:block" /> 15+ Clients</div>
-          <div className="hidden h-3 w-px bg-black/10 dark:bg-white/15 sm:block" />
-          <div className="flex items-center gap-1.5 sm:gap-2"><Sparkles size={12} className="text-brand-green sm:hidden" /><Sparkles size={14} className="hidden text-brand-green sm:block" /> 99% Satisfaction</div>
-        </div>
-      </div>
-    </section>
+    </header>
   );
 }
