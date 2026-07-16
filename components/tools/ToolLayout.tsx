@@ -14,8 +14,11 @@ export function ToolLayout({ tool, children }: { tool: ToolMeta; children: React
       <ToolVisitRecorder slug={tool.slug} />
       <Nav />
       <main>
-        <section style={{ position: "relative", zIndex: 2, padding: "140px clamp(20px,5vw,60px) 60px" }}>
-          <div style={{ maxWidth: 900, margin: "0 auto", width: "100%" }}>
+        <section
+          className="gx-tool-section"
+          style={{ position: "relative", zIndex: 2, padding: "140px clamp(20px,5vw,60px) 60px" }}
+        >
+          <div className="gx-tool-header" style={{ maxWidth: 900, margin: "0 auto", width: "100%" }}>
             <Link
               href="/tools"
               data-cursor

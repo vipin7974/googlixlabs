@@ -150,10 +150,6 @@ export function calculateWebsiteCost(input: CostCalculatorInput): CostCalculator
   return { costMin, costMax, timelineWeeksMin, timelineWeeksMax, complexity, recommendedPackage };
 }
 
-export function formatInr(amount: number): string {
-  return new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 0,
-  }).format(amount);
-}
+// Re-exported for backwards compatibility — new tools should import
+// formatInr/formatNumber directly from "./format" instead.
+export { formatInr } from "./format";

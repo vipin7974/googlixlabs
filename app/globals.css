@@ -565,3 +565,33 @@ select {
   color: var(--ink);
   border-color: var(--ink);
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Print (Invoice Generator's "Download PDF" is the browser's own
+   print-to-PDF — no PDF-generation dependency, always renders correctly
+   since it's the browser's own engine, not a layout library guessing at
+   text wrapping/page breaks)
+   ───────────────────────────────────────────────────────────── */
+@media print {
+  #nav,
+  #mobile-menu,
+  #contact,
+  #prog,
+  #cursor-dot,
+  #cursor-ring,
+  .gx-tool-header,
+  .gx-tool-cta,
+  .gx-print-hide {
+    display: none !important;
+  }
+  .gx-tool-section {
+    padding: 0 !important;
+  }
+  body {
+    background: #fff !important;
+  }
+  .gx-invoice-print {
+    color: #111 !important;
+    background: #fff !important;
+  }
+}

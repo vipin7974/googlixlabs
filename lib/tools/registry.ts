@@ -32,7 +32,7 @@ export const toolsRegistry: ToolMeta[] = [
     description: "See how much extra revenue a better website could bring in, month by month.",
     icon: "chart",
     accent: ACCENTS.Molten,
-    status: "coming-soon",
+    status: "available",
     keywords: ["website roi calculator", "digital marketing roi"],
   },
   {
@@ -42,7 +42,7 @@ export const toolsRegistry: ToolMeta[] = [
     description: "A 10-question checkup on your website, socials and reviews, scored out of 100.",
     icon: "gauge",
     accent: ACCENTS.Signal,
-    status: "coming-soon",
+    status: "available",
     keywords: ["digital presence score", "online presence checker"],
   },
   {
@@ -52,7 +52,7 @@ export const toolsRegistry: ToolMeta[] = [
     description: "Find out how ready your business is to invest in growth, based on where you are today.",
     icon: "target",
     accent: ACCENTS.Botanic,
-    status: "coming-soon",
+    status: "available",
     keywords: ["business growth readiness"],
   },
   {
@@ -62,7 +62,7 @@ export const toolsRegistry: ToolMeta[] = [
     description: "Generate a QR code for your website, WhatsApp or Google review link and download it as a PNG.",
     icon: "qrcode",
     accent: ACCENTS.Molten,
-    status: "coming-soon",
+    status: "available",
     keywords: ["qr code generator", "google review qr code"],
   },
   {
@@ -72,7 +72,7 @@ export const toolsRegistry: ToolMeta[] = [
     description: "Add or remove GST from any amount in one step — simple, fast and accurate.",
     icon: "percent",
     accent: ACCENTS.Signal,
-    status: "coming-soon",
+    status: "available",
     keywords: ["gst calculator india"],
   },
   {
@@ -82,7 +82,7 @@ export const toolsRegistry: ToolMeta[] = [
     description: "Work out your monthly loan instalment and total interest before you borrow.",
     icon: "coins",
     accent: ACCENTS.Botanic,
-    status: "coming-soon",
+    status: "available",
     keywords: ["emi calculator"],
   },
   {
@@ -92,7 +92,7 @@ export const toolsRegistry: ToolMeta[] = [
     description: "Create a professional, GST-ready invoice and download it as a PDF in minutes.",
     icon: "document",
     accent: ACCENTS.Molten,
-    status: "coming-soon",
+    status: "available",
     keywords: ["free invoice generator india", "gst invoice generator"],
   },
   {
@@ -102,7 +102,7 @@ export const toolsRegistry: ToolMeta[] = [
     description: "Turn your name, number and website into a clean, shareable digital business card.",
     icon: "idcard",
     accent: ACCENTS.Signal,
-    status: "coming-soon",
+    status: "available",
     keywords: ["digital business card generator"],
   },
 ];
