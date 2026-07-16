@@ -26,7 +26,7 @@ export default function Approach() {
             paddingTop: "clamp(40px,6vw,64px)",
           }}
         >
-          (04) — How we work
+          (05) — How we work
         </h2>
 
         <div

@@ -112,7 +112,6 @@ export default function Hero({ accent = "#2B5CFF" }: { accent?: string }) {
                 fontFamily: "var(--font-mono), monospace",
                 fontSize: 13,
                 letterSpacing: ".03em",
-                color: "var(--ink)",
                 whiteSpace: "nowrap",
               }}
             >

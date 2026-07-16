@@ -138,7 +138,6 @@ export default function Work({ accent = "#2B5CFF" }: { accent?: string }) {
                   gap: 20,
                   padding: "clamp(22px,3vw,34px) 6px",
                   borderBottom: "1px solid rgba(244,243,238,.16)",
-                  color: "var(--paper)",
                   position: "relative",
                 }}
               >

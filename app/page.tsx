@@ -6,6 +6,7 @@ import Marquee from "@/components/sections/Marquee";
 import Studio from "@/components/sections/Studio";
 import Work from "@/components/sections/Work";
 import Capabilities from "@/components/sections/Capabilities";
+import Tools from "@/components/sections/Tools";
 import Approach from "@/components/sections/Approach";
 import ContactFooter from "@/components/sections/ContactFooter";
 
@@ -21,6 +22,7 @@ export default function HomePage() {
         <Studio />
         <Work accent={ACCENT} />
         <Capabilities />
+        <Tools />
         <Approach />
         <ContactFooter />
       </main>

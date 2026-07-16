@@ -25,7 +25,7 @@ export default function ContactFooter() {
             margin: "0 0 clamp(30px,4vw,48px)",
           }}
         >
-          (05) — Let&apos;s talk
+          (06) — Let&apos;s talk
         </h2>
 
         <a
@@ -39,7 +39,6 @@ export default function ContactFooter() {
             fontSize: "clamp(2.4rem,9vw,7.5rem)",
             lineHeight: 0.95,
             letterSpacing: "-.04em",
-            color: "var(--paper)",
             margin: "0 0 clamp(40px,6vw,70px)",
           }}
         >
@@ -72,7 +71,7 @@ export default function ContactFooter() {
             >
               Email
             </div>
-            <a href="mailto:googlixlabs@gmail.com" data-cursor style={{ fontFamily: "var(--font-manrope), sans-serif", fontSize: 15, color: "var(--paper)" }}>
+            <a href="mailto:googlixlabs@gmail.com" data-cursor style={{ fontFamily: "var(--font-manrope), sans-serif", fontSize: 15 }}>
               googlixlabs@gmail.com
             </a>
             <div
@@ -87,7 +86,7 @@ export default function ContactFooter() {
             >
               Phone
             </div>
-            <a href="tel:+917000498574" data-cursor style={{ fontFamily: "var(--font-manrope), sans-serif", fontSize: 15, color: "var(--paper)" }}>
+            <a href="tel:+917000498574" data-cursor style={{ fontFamily: "var(--font-manrope), sans-serif", fontSize: 15 }}>
               +91 70004 98574
             </a>
           </div>
@@ -134,7 +133,7 @@ export default function ContactFooter() {
                   rel="noopener"
                   data-cursor
                   className="gx-social-link"
-                  style={{ fontFamily: "var(--font-manrope), sans-serif", fontSize: 15, color: "rgba(244,243,238,.75)" }}
+                  style={{ fontFamily: "var(--font-manrope), sans-serif", fontSize: 15 }}
                 >
                   {s.label} ↗
                 </a>
