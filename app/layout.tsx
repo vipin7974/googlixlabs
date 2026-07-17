@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Instrument_Serif, Manrope, JetBrains_Mono } from "next/font/google";
+import { LiveVisitors } from "@/components/LiveVisitors";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -173,6 +174,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         }}
       >
         {children}
+        <LiveVisitors />
       </body>
     </html>
   );
