@@ -234,7 +234,7 @@ select {
 }
 @media (min-width: 721px) {
   .gx-foot-grid {
-    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-columns: 1.1fr 1fr 1fr 1fr;
   }
 }
 
@@ -397,6 +397,14 @@ select {
   border: 1px solid var(--line);
   border-radius: 14px;
   background: var(--paper);
+  transition: border-color 0.25s, transform 0.25s;
+}
+/* Tag-qualified on purpose — .gx-result-card is also used for non-interactive
+   result displays (calculators, etc.); only anchor-rendered instances (e.g.
+   location pages' service links) should look clickable. */
+a.gx-result-card:hover {
+  border-color: rgba(23, 24, 27, 0.3);
+  transform: translateY(-2px);
 }
 .gx-result-label {
   font-family: var(--font-mono), monospace;

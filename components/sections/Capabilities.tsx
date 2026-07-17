@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { capabilities } from "@/lib/content";
 
 export default function Capabilities() {
@@ -90,6 +91,24 @@ export default function Capabilities() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div style={{ marginTop: 40 }}>
+          <Link
+            href="/services"
+            data-cursor
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              fontFamily: "var(--font-mono), monospace",
+              fontSize: 13,
+              letterSpacing: ".02em",
+              color: "var(--ink)",
+            }}
+          >
+            See all services ↗
+          </Link>
         </div>
       </div>
     </section>

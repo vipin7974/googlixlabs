@@ -3,12 +3,19 @@ import type { ReactNode } from "react";
 import Nav from "@/components/Nav";
 import Interactions from "@/components/Interactions";
 import ContactFooter from "@/components/sections/ContactFooter";
+import { CTASection } from "@/components/CTASection";
+import { locationsRegistry } from "@/lib/locations/registry";
 import type { ToolMeta } from "@/lib/tools/types";
-import { CTASection } from "./CTASection";
 import { ToolIcon } from "./icons";
 import { ToolVisitRecorder } from "./ToolVisitRecorder";
 
+const FEATURED_LOCATION_SLUGS = ["raipur", "chhattisgarh", "bhilai", "nagpur"];
+
 export function ToolLayout({ tool, children }: { tool: ToolMeta; children: ReactNode }) {
+  const featuredLocations = FEATURED_LOCATION_SLUGS.map((slug) => locationsRegistry.find((loc) => loc.slug === slug)).filter(
+    (loc): loc is NonNullable<typeof loc> => loc !== undefined
+  );
+
   return (
     <>
       <ToolVisitRecorder slug={tool.slug} />
@@ -88,7 +95,56 @@ export function ToolLayout({ tool, children }: { tool: ToolMeta; children: React
             {children}
           </div>
 
-          <div style={{ maxWidth: 900, margin: "64px auto 0", width: "100%" }}>
+          {featuredLocations.length > 0 ? (
+            <div style={{ maxWidth: 900, margin: "56px auto 0", width: "100%" }}>
+              <span
+                style={{
+                  display: "block",
+                  fontFamily: "var(--font-mono), monospace",
+                  fontSize: 11,
+                  letterSpacing: ".05em",
+                  textTransform: "uppercase",
+                  color: "var(--faint)",
+                  marginBottom: 14,
+                }}
+              >
+                Serving businesses across
+              </span>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+                {featuredLocations.map((loc) => (
+                  <Link
+                    key={loc.slug}
+                    href={`/locations/${loc.slug}`}
+                    data-cursor
+                    style={{
+                      fontFamily: "var(--font-mono), monospace",
+                      fontSize: 12,
+                      color: "var(--muted)",
+                      border: "1px solid var(--line)",
+                      borderRadius: 100,
+                      padding: "7px 15px",
+                    }}
+                  >
+                    {loc.name}
+                  </Link>
+                ))}
+                <Link
+                  href="/locations"
+                  data-cursor
+                  style={{
+                    fontFamily: "var(--font-mono), monospace",
+                    fontSize: 12,
+                    color: "var(--accent)",
+                    padding: "7px 4px",
+                  }}
+                >
+                  View all locations ↗
+                </Link>
+              </div>
+            </div>
+          ) : null}
+
+          <div style={{ maxWidth: 900, margin: "56px auto 0", width: "100%" }}>
             <CTASection />
           </div>
         </section>

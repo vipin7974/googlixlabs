@@ -96,7 +96,7 @@ export default function Nav() {
         </span>
       </a>
 
-      <div className="gx-navlinks" style={{ alignItems: "center", gap: 30 }}>
+      <div className="gx-navlinks" style={{ alignItems: "center", gap: "clamp(14px,2vw,30px)" }}>
         {navLinks.map((l) => (
           <a
             key={l.href}

@@ -1,7 +1,11 @@
-export function CTASection() {
+export function CTASection({
+  eyebrow = "Want professionals to build this for you?",
+}: {
+  eyebrow?: string;
+} = {}) {
   return (
     <section className="gx-tool-cta" data-fade>
-      <p className="gx-tool-cta-eyebrow">Want professionals to build this for you?</p>
+      <p className="gx-tool-cta-eyebrow">{eyebrow}</p>
       <h2 className="gx-tool-cta-heading">
         Book a free 30-minute{" "}
         <span style={{ fontFamily: "var(--font-instrument), serif", fontWeight: 400, fontStyle: "italic" }}>

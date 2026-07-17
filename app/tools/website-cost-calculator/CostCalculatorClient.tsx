@@ -12,6 +12,8 @@ import {
   type BusinessType,
   type FeatureKey,
 } from "@/lib/tools/costCalculator";
+import { CURRENCY_OPTIONS, formatInCurrency, type CurrencyCode } from "@/lib/tools/currency";
+import { useCurrencyRates } from "@/lib/tools/useCurrencyRates";
 import { useLocalStorageState } from "@/lib/tools/useLocalStorageState";
 import { FormField } from "@/components/tools/FormField";
 import { ResultCard } from "@/components/tools/ResultCard";
@@ -40,6 +42,13 @@ export function CostCalculatorClient() {
   );
   const [pagesDraft, setPagesDraft] = useState(String(DEFAULT_SELECTION.pages));
   const [pagesError, setPagesError] = useState<string | undefined>();
+
+  // Separate localStorage key from `selection` on purpose — this is a
+  // display preference added after the calculator shipped, and keeping it
+  // out of StoredSelection means existing users' saved selections don't
+  // need a migration path for a field that didn't exist yet.
+  const [currency, setCurrency] = useLocalStorageState<CurrencyCode>("gx_tool_cost_calculator_currency", "INR");
+  const { rates } = useCurrencyRates();
 
   // Sync the editable draft from whatever was persisted, exactly once,
   // right when hydration flips true — not on every `selection.pages`
@@ -93,12 +102,20 @@ export function CostCalculatorClient() {
     (key) => FEATURE_LABELS[key]
   );
 
+  const inrCostLine = `${formatInr(result.costMin)} – ${formatInr(result.costMax)}`;
+  const convertedCostLine =
+    currency === "INR"
+      ? null
+      : `${formatInCurrency(result.costMin, currency, rates)} – ${formatInCurrency(result.costMax, currency, rates)}`;
+
   const quoteBody = [
     `Business type: ${selection.businessType}`,
     `Pages: ${selection.pages}`,
     `Features: ${selectedFeatureLabels.length > 0 ? selectedFeatureLabels.join(", ") : "None selected"}`,
     "",
-    `Estimated cost: ${formatInr(result.costMin)} – ${formatInr(result.costMax)}`,
+    // Quotes and invoices are always in INR — the converted figure is
+    // included only as a courtesy reference, never as the authoritative one.
+    `Estimated cost: ${inrCostLine}${convertedCostLine ? ` (approx. ${convertedCostLine})` : ""}`,
     `Estimated timeline: ${result.timelineWeeksMin}–${result.timelineWeeksMax} weeks`,
     `Complexity: ${result.complexity}`,
     `Recommended package: ${result.recommendedPackage}`,
@@ -168,10 +185,40 @@ export function CostCalculatorClient() {
       </fieldset>
 
       <div>
+        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 14 }}>
+          <label style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <span
+              style={{
+                fontFamily: "var(--font-mono), monospace",
+                fontSize: 11,
+                letterSpacing: ".04em",
+                textTransform: "uppercase",
+                color: "var(--muted)",
+              }}
+            >
+              Show cost in
+            </span>
+            <select
+              aria-label="Display currency"
+              className="gx-tool-input"
+              style={{ width: "auto", padding: "8px 12px", fontSize: 13 }}
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value as CurrencyCode)}
+            >
+              {CURRENCY_OPTIONS.map((option) => (
+                <option key={option.code} value={option.code}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+
         <div className="gx-result-grid">
           <ResultCard
             label="Estimated Cost"
-            value={`${formatInr(result.costMin)} – ${formatInr(result.costMax)}`}
+            value={convertedCostLine ?? inrCostLine}
+            sublabel={convertedCostLine ? `${inrCostLine} in INR` : undefined}
           />
           <ResultCard
             label="Estimated Timeline"
@@ -194,6 +241,7 @@ export function CostCalculatorClient() {
         >
           This is an automated estimate, not a fixed quote — final pricing depends on the details
           of your project.
+          {currency !== "INR" ? " Currency conversion is approximate; all invoicing is in INR." : ""}
         </p>
       </div>
 

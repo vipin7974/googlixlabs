@@ -1,5 +1,8 @@
 import type { MetadataRoute } from "next";
 import { availableTools } from "@/lib/tools/registry";
+import { locationsRegistry } from "@/lib/locations/registry";
+import { servicesRegistry } from "@/lib/services/registry";
+import { industriesRegistry } from "@/lib/industries/registry";
 
 // Google does not index URL fragments (#section) as separate documents, so a
 // single-page site should only list its real, crawlable document here.
@@ -18,6 +21,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.8,
+    })),
+    { url: `${base}/locations`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    ...locationsRegistry.map((location) => ({
+      url: `${base}/locations/${location.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    { url: `${base}/services`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    ...servicesRegistry.map((service) => ({
+      url: `${base}/services/${service.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    { url: `${base}/industries`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    ...industriesRegistry.map((industry) => ({
+      url: `${base}/industries/${industry.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     })),
   ];
 }
