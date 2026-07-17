@@ -53,7 +53,7 @@ export default function LocationSlugPage({ params }: { params: { slug: string } 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(locationFaqJsonLd(location)) }}
       />
-      {location.slug === "raipur" ? (
+      {location.isHeadquarters ? (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(locationLocalBusinessJsonLd()) }}

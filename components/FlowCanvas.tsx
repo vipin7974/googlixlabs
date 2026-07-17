@@ -7,7 +7,14 @@ import { hexA } from "@/lib/hex";
  * Canvas 2D flow-field particle background, ported from the source
  * design's initFlow(). Lives behind the hero copy.
  */
-export default function FlowCanvas({ accent = "#2B5CFF" }: { accent?: string }) {
+export default function FlowCanvas({
+  accent = "#2B5CFF",
+  heightCss = "100vh",
+}: {
+  accent?: string;
+  /** CSS height of the canvas — defaults to the homepage's full-viewport hero; pass "100%" when the parent has its own explicit (non-100vh) height. */
+  heightCss?: string;
+}) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -115,7 +122,7 @@ export default function FlowCanvas({ accent = "#2B5CFF" }: { accent?: string }) 
         top: 0,
         left: 0,
         width: "100%",
-        height: "100vh",
+        height: heightCss,
         zIndex: 0,
         pointerEvents: "none",
       }}

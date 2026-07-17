@@ -1,22 +1,14 @@
-export interface CityCoordinates {
-  slug: string;
-  lat: number;
-  lng: number;
-}
+import { locationCoordinates } from "./registry";
 
-// Public, well-known city-center coordinates — geographic facts, not
-// invented statistics. Used only to suggest the nearest location page
-// after an explicit, user-initiated geolocation lookup; never to redirect
+// Coordinates now live on each city's entry in lib/locations/data.ts —
+// this re-exports that same list rather than keeping a second,
+// separately-maintained array that could drift out of sync as cities are
+// added. Used only to suggest the nearest location page after an
+// explicit, user-initiated geolocation lookup; never to redirect
 // automatically (that's a real SEO cloaking risk — Googlebot has no
 // "location" to match against, and every visitor should be free to land
 // on and navigate between location pages the same way).
-export const CITY_COORDINATES: CityCoordinates[] = [
-  { slug: "raipur", lat: 21.2514, lng: 81.6296 },
-  { slug: "bhilai", lat: 21.2094, lng: 81.3784 },
-  { slug: "durg", lat: 21.1904, lng: 81.2849 },
-  { slug: "bilaspur", lat: 22.0797, lng: 82.1409 },
-  { slug: "nagpur", lat: 21.1458, lng: 79.0882 },
-];
+export const CITY_COORDINATES = locationCoordinates;
 
 const EARTH_RADIUS_KM = 6371;
 

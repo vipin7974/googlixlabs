@@ -54,8 +54,17 @@ export function NearestLocation() {
           <Link
             href={`/locations/${matchedLocation.slug}`}
             data-cursor
+            data-magnetic
             className="gx-nav-cta"
-            style={{ fontSize: 12 }}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              fontFamily: "var(--font-mono), monospace",
+              fontSize: 12,
+              border: "1px solid var(--line)",
+              borderRadius: 100,
+              padding: "8px 14px",
+            }}
           >
             View {matchedLocation.name} page ↗
           </Link>
@@ -64,10 +73,19 @@ export function NearestLocation() {
         <button
           type="button"
           data-cursor
+          data-magnetic
           onClick={handleClick}
           disabled={status === "loading"}
           className="gx-nav-cta"
-          style={{ fontSize: 12 }}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            fontFamily: "var(--font-mono), monospace",
+            fontSize: 12,
+            border: "1px solid var(--line)",
+            borderRadius: 100,
+            padding: "8px 14px",
+          }}
         >
           {status === "loading" ? "Finding your nearest location…" : "Find my nearest location"}
         </button>

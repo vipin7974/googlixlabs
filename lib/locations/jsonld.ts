@@ -1,5 +1,5 @@
 import { CITY_COORDINATES } from "./geo";
-import { getLocationBySlug } from "./registry";
+import { getHeadquartersLocation, getLocationBySlug } from "./registry";
 import type { LocationContent } from "./types";
 
 const SITE_URL = "https://googlixlabs.com";
@@ -71,8 +71,9 @@ export function locationBreadcrumbJsonLd(location: LocationContent) {
 }
 
 /**
- * Only ever called for the Raipur page — that's the one location where a
- * physical-address claim is true. Reuses the exact same @id as the global
+ * Only ever called for the headquarters location (`location.isHeadquarters`
+ * in the data file) — that's the one location where a physical-address
+ * claim is true. Reuses the exact same @id as the global
  * Organization/ProfessionalService entity in app/layout.tsx (repeating an
  * entity with the same @id across pages is normal, expected practice, not
  * duplicate content) rather than declaring a second, competing entity.
@@ -80,7 +81,10 @@ export function locationBreadcrumbJsonLd(location: LocationContent) {
  * telling a customer the business is open when it isn't.
  */
 export function locationLocalBusinessJsonLd() {
-  const coords = CITY_COORDINATES.find((c) => c.slug === "raipur");
+  const hq = getHeadquartersLocation();
+  const coords = hq ? CITY_COORDINATES.find((c) => c.slug === hq.slug) : undefined;
+  const state = hq?.parentSlug ? getLocationBySlug(hq.parentSlug) : undefined;
+
   return {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "ProfessionalService"],
@@ -92,8 +96,8 @@ export function locationLocalBusinessJsonLd() {
     telephone: "+91-70004-98574",
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Raipur",
-      addressRegion: "Chhattisgarh",
+      addressLocality: hq?.name ?? "Raipur",
+      addressRegion: state?.name ?? "Chhattisgarh",
       addressCountry: "IN",
     },
     ...(coords

@@ -1,10 +1,5 @@
+import Cube3D from "@/components/Cube3D";
 import { manifestoLines, studioPoints } from "@/lib/content";
-
-const cubeSize = "clamp(150px,17vw,240px)";
-
-function CubeFace({ style }: { style: React.CSSProperties }) {
-  return <div style={{ position: "absolute", inset: "15%", ...style }} />;
-}
 
 export default function Studio() {
   return (
@@ -20,36 +15,7 @@ export default function Studio() {
     >
       <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative" }}>
         {/* floating 3D wireframe cube (pure CSS 3D transforms) */}
-        <div
-          className="gx-cube-wrap"
-          style={{
-            position: "absolute",
-            top: -6,
-            right: 0,
-            width: cubeSize,
-            height: cubeSize,
-            animation: "gxFloat3d 6s ease-in-out infinite",
-            perspective: 800,
-            pointerEvents: "none",
-            zIndex: 1,
-          }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              transformStyle: "preserve-3d",
-              animation: "gxSpin3d 18s linear infinite",
-            }}
-          >
-            <CubeFace style={{ border: "1.5px solid var(--accent)", opacity: 0.85, transform: `translateZ(calc(0.35 * ${cubeSize}))` }} />
-            <CubeFace style={{ border: "1.5px solid var(--ink)", opacity: 0.5, transform: `translateZ(calc(-0.35 * ${cubeSize}))` }} />
-            <CubeFace style={{ border: "1.5px solid var(--ink)", opacity: 0.5, transform: `rotateY(90deg) translateZ(calc(0.35 * ${cubeSize}))` }} />
-            <CubeFace style={{ border: "1.5px solid var(--accent)", opacity: 0.85, transform: `rotateY(90deg) translateZ(calc(-0.35 * ${cubeSize}))` }} />
-            <CubeFace style={{ border: "1.5px solid var(--ink)", opacity: 0.5, transform: `rotateX(90deg) translateZ(calc(0.35 * ${cubeSize}))` }} />
-            <CubeFace style={{ border: "1.5px solid var(--ink)", opacity: 0.5, transform: `rotateX(90deg) translateZ(calc(-0.35 * ${cubeSize}))` }} />
-          </div>
-        </div>
+        <Cube3D />
 
         <div
           data-fade

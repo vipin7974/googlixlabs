@@ -4,17 +4,13 @@ import Nav from "@/components/Nav";
 import Interactions from "@/components/Interactions";
 import ContactFooter from "@/components/sections/ContactFooter";
 import { CTASection } from "@/components/CTASection";
-import { locationsRegistry } from "@/lib/locations/registry";
+import { getFeaturedLocations } from "@/lib/locations/registry";
 import type { ToolMeta } from "@/lib/tools/types";
 import { ToolIcon } from "./icons";
 import { ToolVisitRecorder } from "./ToolVisitRecorder";
 
-const FEATURED_LOCATION_SLUGS = ["raipur", "chhattisgarh", "bhilai", "nagpur"];
-
 export function ToolLayout({ tool, children }: { tool: ToolMeta; children: ReactNode }) {
-  const featuredLocations = FEATURED_LOCATION_SLUGS.map((slug) => locationsRegistry.find((loc) => loc.slug === slug)).filter(
-    (loc): loc is NonNullable<typeof loc> => loc !== undefined
-  );
+  const featuredLocations = getFeaturedLocations();
 
   return (
     <>

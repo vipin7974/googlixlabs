@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Interactions from "@/components/Interactions";
+import FlowCanvas from "@/components/FlowCanvas";
+import Cube3D from "@/components/Cube3D";
 import ContactFooter from "@/components/sections/ContactFooter";
 import { CTASection } from "@/components/CTASection";
 import { ToolCard } from "@/components/tools/ToolCard";
@@ -10,6 +12,8 @@ import type { LocationContent, LocationFaq } from "@/lib/locations/types";
 import type { ToolMeta } from "@/lib/tools/types";
 import { servicesRegistry } from "@/lib/services/registry";
 import { getIndustryBySlug } from "@/lib/industries/registry";
+import { buildDigitalGrowthReport } from "@/lib/locations/digital-report";
+import { hexA } from "@/lib/hex";
 import { Breadcrumb } from "./Breadcrumb";
 
 const FEATURED_TOOL_SLUGS = ["website-cost-calculator", "digital-score", "roi-calculator", "qr-generator"];
@@ -48,10 +52,46 @@ const tagLinkStyle = {
   padding: "6px 14px",
 };
 
+/**
+ * `.gx-nav-cta` (globals.css) only defines color + hover transition — the
+ * actual pill/button look (border, radius, padding, inline-flex) comes
+ * from inline styles wherever it's used (see Nav.tsx's real CTA button).
+ * The location pills were using the className alone, which is why they
+ * rendered as plain text instead of buttons.
+ */
+const pillButtonStyle = {
+  display: "inline-flex",
+  alignItems: "center",
+  fontFamily: "var(--font-mono), monospace",
+  fontSize: 13,
+  border: "1px solid var(--line)",
+  borderRadius: 100,
+  padding: "9px 16px",
+};
+
+/** Prose paragraphs (About/Why/report intro) get a readable line-length cap — the wider 1300px page container is meant for grids and cards, not 100+ character lines of running text. */
+const proseTextStyle = { ...bodyTextStyle, maxWidth: "68ch" };
+
 const inlineLinkRowStyle = {
   fontFamily: "var(--font-mono), monospace",
   fontSize: 12.5,
   color: "var(--accent)",
+};
+
+const reportCardTitleStyle = {
+  fontFamily: "var(--font-bricolage), sans-serif",
+  fontWeight: 600,
+  fontSize: 15.5,
+  color: "var(--ink)",
+};
+
+const reportListStyle = {
+  margin: "4px 0 0",
+  padding: "0 0 0 18px",
+  fontFamily: "var(--font-manrope), sans-serif",
+  fontSize: 13.5,
+  lineHeight: 1.6,
+  color: "var(--muted)",
 };
 
 const CHILD_LABEL: Record<string, string> = {
@@ -101,12 +141,31 @@ export function LocationPage({ location }: { location: LocationContent }) {
   // as a location page, so its breadcrumb correctly stops at Locations.
   const parentLocation = location.parentSlug ? locationsRegistry.find((loc) => loc.slug === location.parentSlug) : undefined;
 
+  const report = buildDigitalGrowthReport(location);
+  const hasReport = report.challenges.length > 0 || report.nextSteps.length > 0;
+  const accentTagStyle = { ...tagLinkStyle, border: `1px solid ${hexA(location.accent, 0.35)}` };
+
   return (
     <>
       <Nav />
       <main>
-        <section style={{ position: "relative", zIndex: 2, padding: "140px clamp(20px,5vw,60px) 0" }}>
-          <div style={{ maxWidth: 900, margin: "0 auto", width: "100%" }}>
+        <section
+          style={{
+            position: "relative",
+            zIndex: 2,
+            overflow: "hidden",
+            minHeight: "clamp(520px,56vw,700px)",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: "140px clamp(20px,5vw,60px) 60px",
+          }}
+        >
+          <FlowCanvas accent={location.accent} heightCss="100%" />
+
+          <div style={{ position: "relative", zIndex: 1, maxWidth: 1300, margin: "0 auto", width: "100%" }}>
+            <Cube3D accent={location.accent} />
+
             <div data-fade style={{ marginBottom: 26 }}>
               <Breadcrumb
                 items={[
@@ -118,10 +177,20 @@ export function LocationPage({ location }: { location: LocationContent }) {
               />
             </div>
 
-            <div data-fade style={{ ...eyebrowStyle, marginBottom: 18 }}>{location.heroEyebrow}</div>
+            <div data-fade style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 18 }}>
+              <span
+                style={{
+                  width: 7,
+                  height: 7,
+                  borderRadius: "50%",
+                  background: location.accent,
+                  animation: "gxBlink 2.4s infinite",
+                }}
+              />
+              <span style={eyebrowStyle}>{location.heroEyebrow}</span>
+            </div>
 
             <h1
-              data-fade
               style={{
                 fontFamily: "var(--font-bricolage), sans-serif",
                 fontWeight: 600,
@@ -132,9 +201,13 @@ export function LocationPage({ location }: { location: LocationContent }) {
                 margin: "0 0 20px",
               }}
             >
-              {location.heroHeadingPlain}{" "}
-              <span style={{ fontFamily: "var(--font-instrument), serif", fontWeight: 400, fontStyle: "italic" }}>
-                {location.heroHeadingAccent}
+              <span className="gx-mask">
+                <span>
+                  {location.heroHeadingPlain}{" "}
+                  <span style={{ fontFamily: "var(--font-instrument), serif", fontWeight: 400, fontStyle: "italic" }}>
+                    {location.heroHeadingAccent}
+                  </span>
+                </span>
               </span>
             </h1>
 
@@ -144,12 +217,12 @@ export function LocationPage({ location }: { location: LocationContent }) {
           </div>
         </section>
 
-        <div style={{ maxWidth: 900, margin: "0 auto", width: "100%", padding: "0 clamp(20px,5vw,60px)" }}>
+        <div style={{ maxWidth: 1300, margin: "0 auto", width: "100%", padding: "0 clamp(20px,5vw,60px)" }}>
           {/* About */}
           <section data-fade style={{ padding: "56px 0", borderTop: "1px solid var(--line)", marginTop: 56 }}>
             <h2 style={sectionHeadingStyle}>{location.aboutHeading}</h2>
             {location.aboutBody.map((para, i) => (
-              <p key={i} style={bodyTextStyle}>
+              <p key={i} style={proseTextStyle}>
                 {para}
               </p>
             ))}
@@ -159,11 +232,58 @@ export function LocationPage({ location }: { location: LocationContent }) {
           <section data-fade style={{ padding: "0 0 56px" }}>
             <h2 style={sectionHeadingStyle}>{location.whyHeading}</h2>
             {location.whyBody.map((para, i) => (
-              <p key={i} style={bodyTextStyle}>
+              <p key={i} style={proseTextStyle}>
                 {para}
               </p>
             ))}
           </section>
+
+          {/* Digital Growth Report — genuinely useful, not just SEO copy */}
+          {hasReport && (
+            <section data-fade style={{ padding: "0 0 56px" }}>
+              <h2 style={sectionHeadingStyle}>Free Digital Growth Report — {location.name}</h2>
+              <p style={proseTextStyle}>
+                A quick, honest snapshot of what typically holds {location.name} businesses back online, based on
+                the industries we see most here — and what to do about it.
+              </p>
+
+              <div className="gx-result-grid" style={{ marginTop: 8 }}>
+                {report.challenges.length > 0 && (
+                  <div className="gx-result-card" style={{ borderTop: `3px solid ${location.accent}` }}>
+                    <span style={reportCardTitleStyle}>Common Online Visibility Challenges</span>
+                    <ul style={reportListStyle}>
+                      {report.challenges.map((challenge) => (
+                        <li key={challenge}>{challenge}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {report.nextSteps.length > 0 && (
+                  <div className="gx-result-card" style={{ borderTop: `3px solid ${location.accent}` }}>
+                    <span style={reportCardTitleStyle}>Suggested Next Steps</span>
+                    <ul style={reportListStyle}>
+                      {report.nextSteps.map((step) => (
+                        <li key={step}>{step}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+
+              {report.recommendedTools.length > 0 && (
+                <>
+                  <p style={{ ...bodyTextStyle, marginTop: 24 }}>
+                    Recommended free tools for {location.name} businesses in these industries:
+                  </p>
+                  <div className="gx-tools-grid">
+                    {report.recommendedTools.map((tool) => (
+                      <ToolCard key={tool.slug} tool={tool} />
+                    ))}
+                  </div>
+                </>
+              )}
+            </section>
+          )}
 
           {/* Strict hierarchy: country -> states, state -> cities */}
           {childLocations.length > 0 && (
@@ -171,7 +291,14 @@ export function LocationPage({ location }: { location: LocationContent }) {
               <h2 style={sectionHeadingStyle}>{CHILD_LABEL[location.level] ?? "Explore"}</h2>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
                 {childLocations.map((loc) => (
-                  <Link key={loc.slug} href={`/locations/${loc.slug}`} data-cursor className="gx-nav-cta" style={{ fontSize: 13 }}>
+                  <Link
+                    key={loc.slug}
+                    href={`/locations/${loc.slug}`}
+                    data-cursor
+                    data-magnetic
+                    className="gx-nav-cta"
+                    style={{ ...pillButtonStyle, borderColor: hexA(loc.accent, 0.4) }}
+                  >
                     {loc.name}
                   </Link>
                 ))}
@@ -187,11 +314,11 @@ export function LocationPage({ location }: { location: LocationContent }) {
               {location.industries.map((tag, i) => {
                 const industry = getIndustryBySlug(tag.slug);
                 return industry ? (
-                  <Link key={`${tag.slug}-${i}`} href={`/industries/${industry.slug}`} data-cursor style={tagLinkStyle}>
+                  <Link key={`${tag.slug}-${i}`} href={`/industries/${industry.slug}`} data-cursor style={accentTagStyle}>
                     {tag.label}
                   </Link>
                 ) : (
-                  <span key={`${tag.slug}-${i}`} style={tagLinkStyle}>
+                  <span key={`${tag.slug}-${i}`} style={accentTagStyle}>
                     {tag.label}
                   </span>
                 );
@@ -300,7 +427,14 @@ export function LocationPage({ location }: { location: LocationContent }) {
               <h2 style={sectionHeadingStyle}>Also Serving Nearby</h2>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
                 {relatedLocations.map((loc) => (
-                  <Link key={loc.slug} href={`/locations/${loc.slug}`} data-cursor className="gx-nav-cta" style={{ fontSize: 13 }}>
+                  <Link
+                    key={loc.slug}
+                    href={`/locations/${loc.slug}`}
+                    data-cursor
+                    data-magnetic
+                    className="gx-nav-cta"
+                    style={{ ...pillButtonStyle, borderColor: hexA(loc.accent, 0.4) }}
+                  >
                     {loc.name}
                   </Link>
                 ))}
@@ -312,13 +446,13 @@ export function LocationPage({ location }: { location: LocationContent }) {
           <section data-fade style={{ padding: "0 0 56px" }}>
             <h2 style={sectionHeadingStyle}>Explore GooglixLabs</h2>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-              <Link href="/#work" data-cursor className="gx-nav-cta" style={{ fontSize: 13 }}>
+              <Link href="/#work" data-cursor data-magnetic className="gx-nav-cta" style={pillButtonStyle}>
                 Portfolio ↗
               </Link>
-              <Link href="/#work" data-cursor className="gx-nav-cta" style={{ fontSize: 13 }}>
+              <Link href="/#work" data-cursor data-magnetic className="gx-nav-cta" style={pillButtonStyle}>
                 Case Studies ↗
               </Link>
-              <Link href="/#contact" data-cursor className="gx-nav-cta" style={{ fontSize: 13 }}>
+              <Link href="/#contact" data-cursor data-magnetic className="gx-nav-cta" style={pillButtonStyle}>
                 Contact ↗
               </Link>
             </div>

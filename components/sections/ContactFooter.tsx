@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { socials } from "@/lib/content";
-import { locationsRegistry } from "@/lib/locations/registry";
+import { getFeaturedLocations } from "@/lib/locations/registry";
 
 export default function ContactFooter() {
   return (
@@ -157,7 +157,7 @@ export default function ContactFooter() {
               Locations
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 10px" }}>
-              {locationsRegistry.map((location) => (
+              {getFeaturedLocations().map((location) => (
                 <Link
                   key={location.slug}
                   href={`/locations/${location.slug}`}
@@ -168,6 +168,14 @@ export default function ContactFooter() {
                   {location.name}
                 </Link>
               ))}
+              <Link
+                href="/locations"
+                data-cursor
+                className="gx-social-link"
+                style={{ fontFamily: "var(--font-manrope), sans-serif", fontSize: 14 }}
+              >
+                All locations ↗
+              </Link>
             </div>
           </div>
         </div>
