@@ -575,6 +575,101 @@ a.gx-result-card:hover {
 }
 
 /* ─────────────────────────────────────────────────────────────
+   Policy Document (/policies) — the client-facing, letterhead-style
+   consolidation of the Privacy Policy, Terms of Service, Cookie Policy,
+   Refund & Cancellation Policy and Acceptable Use Policy into one
+   printable document.
+   ───────────────────────────────────────────────────────────── */
+.gx-policy-card {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--paper);
+  overflow: hidden;
+}
+.gx-policy-header-band {
+  background: #58585a;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  color-adjust: exact;
+}
+.gx-policy-toc {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.gx-policy-toc a {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 15px;
+  color: var(--ink);
+  transition: color 0.2s, gap 0.2s;
+}
+.gx-policy-toc a:hover {
+  color: var(--accent);
+  gap: 18px;
+}
+.gx-policy-toc a:last-child {
+  border-bottom: none;
+}
+.gx-policy-section {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.gx-policy-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.gx-policy-list li {
+  position: relative;
+  padding-left: 22px;
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+.gx-policy-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+.gx-policy-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 14px;
+}
+.gx-policy-table th,
+.gx-policy-table td {
+  border: 1px solid var(--line);
+  padding: 11px 14px;
+  text-align: left;
+  vertical-align: top;
+  color: var(--ink);
+}
+.gx-policy-table th {
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 400;
+  background: rgba(23, 24, 27, 0.03);
+}
+
+/* ─────────────────────────────────────────────────────────────
    Print (Invoice Generator's "Download PDF" is the browser's own
    print-to-PDF — no PDF-generation dependency, always renders correctly
    since it's the browser's own engine, not a layout library guessing at
@@ -601,5 +696,8 @@ a.gx-result-card:hover {
   .gx-invoice-print {
     color: #111 !important;
     background: #fff !important;
+  }
+  .gx-policy-card {
+    border-color: #ccc !important;
   }
 }

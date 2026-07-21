@@ -193,6 +193,9 @@ export default function ContactFooter() {
           }}
         >
           <span>© {new Date().getFullYear()} GooglixLabs</span>
+          <Link href="/policies" data-cursor className="gx-social-link" style={{ color: "inherit" }}>
+            Privacy & Company Policies
+          </Link>
           <span>Designed &amp; engineered in Raipur, India</span>
         </div>
       </div>

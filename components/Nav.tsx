@@ -92,7 +92,7 @@ export default function Nav() {
             color: "var(--ink)",
           }}
         >
-          googlixlabs
+          googlix<span style={{color:'#2b5cff'}}>labs</span>
         </span>
       </a>
 
