@@ -40,7 +40,7 @@ export default function OpengraphImage() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <span style={{ fontSize: 28, fontStyle: "italic", color: "#2B5CFF" }}>
-            Digital product studio — Raipur, IN
+            Digital product studio — Bhilai, IN
           </span>
           <span style={{ fontSize: 72, fontWeight: 700, letterSpacing: "-0.03em", color: "#17181B", lineHeight: 1.05 }}>
             We design &amp; engineer
@@ -64,7 +64,7 @@ export default function OpengraphImage() {
           }}
         >
           <span>googlixlabs.com</span>
-          <span>Raipur, India</span>
+          <span>Bhilai, India</span>
         </div>
       </div>
     ),

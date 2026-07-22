@@ -44,14 +44,14 @@ const siteUrl = "https://googlixlabs.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "GooglixLabs — Digital Product Studio | Web, Design & AI Development in Raipur",
+    default: "GooglixLabs — Digital Product Studio | Web, Design & AI Development in Bhilai",
     template: "%s · GooglixLabs",
   },
   description:
-    "GooglixLabs is a digital product studio in Raipur, India, building intelligent web apps, SaaS platforms, AI products and brand identities for clients worldwide — from first sketch to global scale.",
+    "GooglixLabs is a digital product studio in Bhilai, Chhattisgarh, India, building intelligent web apps, SaaS platforms, AI products and brand identities for clients worldwide — from first sketch to global scale.",
   keywords: [
     "digital product studio",
-    "web development company Raipur",
+    "web development company Bhilai",
     "web app development India",
     "UI UX design agency",
     "applied AI development",
@@ -95,7 +95,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "GooglixLabs — Digital Product Studio",
-    description: "Intelligent web, design & AI products. From Raipur, for the world.",
+    description: "Intelligent web, design & AI products. From Bhilai, for the world.",
   },
 };
 
@@ -115,7 +115,7 @@ const jsonLd = {
       telephone: "+91-70004-98574",
       address: {
         "@type": "PostalAddress",
-        addressLocality: "Raipur",
+        addressLocality: "Bhilai",
         addressRegion: "Chhattisgarh",
         addressCountry: "IN",
       },

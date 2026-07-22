@@ -52,7 +52,6 @@ export const locationsData: CountryInput[] = [
             slug: "raipur",
             lat: 21.2514,
             lng: 81.6296,
-            isHeadquarters: true,
             industries: [
               "retail-ecommerce",
               "real-estate-construction",
@@ -69,6 +68,7 @@ export const locationsData: CountryInput[] = [
             slug: "bhilai",
             lat: 21.2094,
             lng: 81.3784,
+            isHeadquarters: true,
             industries: [
               "manufacturing-industrial",
               "retail-ecommerce",

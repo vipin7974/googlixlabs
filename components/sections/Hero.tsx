@@ -39,7 +39,7 @@ export default function Hero({ accent = "#2B5CFF" }: { accent?: string }) {
                 color: "var(--muted)",
               }}
             >
-              Digital product studio — Raipur, IN
+              Digital product studio — Bhilai, IN
             </span>
           </div>
 

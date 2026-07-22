@@ -107,7 +107,7 @@ export default function ContactFooter() {
               Studio
             </div>
             <p style={{ fontFamily: "var(--font-manrope), sans-serif", fontSize: 15, lineHeight: 1.6, color: "rgba(244,243,238,.75)", margin: 0, maxWidth: "26ch" }}>
-              Raipur, Chhattisgarh
+              Bhilai, Chhattisgarh
               <br />
               India — working worldwide
             </p>
@@ -196,7 +196,7 @@ export default function ContactFooter() {
           <Link href="/policies" data-cursor className="gx-social-link" style={{ color: "inherit" }}>
             Privacy & Company Policies
           </Link>
-          <span>Designed &amp; engineered in Raipur, India</span>
+          <span>Designed &amp; engineered in Bhilai, India</span>
         </div>
       </div>
     </footer>

@@ -94,7 +94,7 @@ export default function LocationsIndexPage() {
                 margin: "0 0 48px",
               }}
             >
-              We&apos;re based in Raipur, Chhattisgarh, and work with businesses across the region and
+              We&apos;re based in Bhilai, Chhattisgarh, and work with businesses across the region and
               beyond.
             </p>
 

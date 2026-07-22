@@ -223,7 +223,7 @@ export default function PoliciesPage() {
                     <List
                       items={[
                         <><strong>Business:</strong> GooglixLabs</>,
-                        <><strong>Location:</strong> Raipur, Chhattisgarh, India</>,
+                        <><strong>Location:</strong> Bhilai, Chhattisgarh, India</>,
                         <><strong>Email:</strong> googlixlabs@gmail.com</>,
                         <><strong>Phone:</strong> +91 70004 98574</>,
                         "GooglixLabs is the data controller for information collected through the site, and data processor for project materials clients share with us.",
@@ -357,7 +357,7 @@ export default function PoliciesPage() {
                       items={[
                         "GooglixLabs is not liable for indirect or consequential damages arising from Site or tool use.",
                         "For paid Services, total liability is limited to the amount paid for the specific engagement giving rise to the claim.",
-                        "Governed by the laws of India; disputes fall under the exclusive jurisdiction of the courts of Raipur, Chhattisgarh, unless a signed client contract states otherwise.",
+                        "Governed by the laws of India; disputes fall under the exclusive jurisdiction of the courts of Bhilai, Chhattisgarh, unless a signed client contract states otherwise.",
                       ]}
                     />
                   </div>
@@ -555,7 +555,7 @@ export default function PoliciesPage() {
                     items={[
                       <><strong>Email:</strong> googlixlabs@gmail.com</>,
                       <><strong>Phone:</strong> +91 70004 98574</>,
-                      <><strong>Location:</strong> Raipur, Chhattisgarh, India</>,
+                      <><strong>Location:</strong> Bhilai, Chhattisgarh, India</>,
                     ]}
                   />
                   <p

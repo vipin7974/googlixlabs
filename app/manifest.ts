@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "GooglixLabs — Digital Product Studio",
     short_name: "GooglixLabs",
     description:
-      "Digital product studio in Raipur, India, building intelligent web apps, SaaS platforms and AI products.",
+      "Digital product studio in Bhilai, Chhattisgarh, India, building intelligent web apps, SaaS platforms and AI products.",
     start_url: "/",
     display: "standalone",
     background_color: "#F4F3EE",

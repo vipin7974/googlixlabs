@@ -5,7 +5,7 @@ import type { LocationContent } from "./types";
 const SITE_URL = "https://googlixlabs.com";
 
 /**
- * GooglixLabs has one physical base (Raipur — see the Organization schema
+ * GooglixLabs has one physical base (Bhilai — see the Organization schema
  * in app/layout.tsx). Every other location here is a service area, not a
  * branch office, so this deliberately uses Service + areaServed rather
  * than declaring a LocalBusiness (with an address) per city — that would
@@ -96,7 +96,7 @@ export function locationLocalBusinessJsonLd() {
     telephone: "+91-70004-98574",
     address: {
       "@type": "PostalAddress",
-      addressLocality: hq?.name ?? "Raipur",
+      addressLocality: hq?.name ?? "Bhilai",
       addressRegion: state?.name ?? "Chhattisgarh",
       addressCountry: "IN",
     },
