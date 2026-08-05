@@ -8,6 +8,10 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  // "class" only matters where a `dark` class is actually present in the
+  // DOM tree — today that's just the LifeOS root wrapper — so this has no
+  // effect on the rest of the (light-only) marketing site.
+  darkMode: "class",
   theme: {
     extend: {},
   },

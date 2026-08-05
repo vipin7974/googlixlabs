@@ -1,0 +1,71 @@
+import Dexie, { type Table } from "dexie";
+import type { Task } from "../types/task";
+import type { Goal } from "../types/goal";
+import type { DailyEntry, DailyQuestionDefinition } from "../types/daily";
+import type { Idea } from "../types/idea";
+import type { Habit, HabitLog } from "../types/habit";
+import type { JournalEntry } from "../types/journal";
+import type { WeeklyReview, MonthlyReview } from "../types/review";
+import type { LearningEntry } from "../types/learning";
+import type { FitnessEntry } from "../types/fitness";
+import type { FinanceEntry } from "../types/finance";
+import type { BookEntry } from "../types/book";
+import type { VisionItem } from "../types/vision";
+import type { DeepWorkSession } from "../types/timer";
+import type { Settings } from "../types/settings";
+
+export class LifeOsDatabase extends Dexie {
+  tasks!: Table<Task, string>;
+  goals!: Table<Goal, string>;
+  daily_entries!: Table<DailyEntry, string>;
+  daily_questions!: Table<DailyQuestionDefinition, string>;
+  ideas!: Table<Idea, string>;
+  habits!: Table<Habit, string>;
+  habit_logs!: Table<HabitLog, string>;
+  journal!: Table<JournalEntry, string>;
+  weekly_reviews!: Table<WeeklyReview, string>;
+  monthly_reviews!: Table<MonthlyReview, string>;
+  learning!: Table<LearningEntry, string>;
+  fitness!: Table<FitnessEntry, string>;
+  finance!: Table<FinanceEntry, string>;
+  books!: Table<BookEntry, string>;
+  vision_board!: Table<VisionItem, string>;
+  deep_work_sessions!: Table<DeepWorkSession, string>;
+  settings!: Table<Settings, string>;
+
+  constructor() {
+    super("lifeos");
+
+    this.version(1).stores({
+      tasks: "id, date, status, priority, order, deadline",
+      goals: "id, parentId, level, archived, deadline",
+      daily_entries: "id, date",
+      daily_questions: "id, order, active",
+      ideas: "id, date, status, category, priority",
+      habits: "id, order, archived",
+      habit_logs: "id, habitId, date, [habitId+date]",
+      journal: "id, date, type, [date+type]",
+      weekly_reviews: "id, weekStart",
+      monthly_reviews: "id, month",
+      learning: "id, date, technology",
+      fitness: "id, date",
+      finance: "id, date, type, category",
+      books: "id, mediaType, completion",
+      vision_board: "id, order, category",
+      deep_work_sessions: "id, date",
+      settings: "id",
+    });
+  }
+}
+
+let dbInstance: LifeOsDatabase | null = null;
+
+export function getLifeOsDb(): LifeOsDatabase {
+  if (typeof window === "undefined") {
+    throw new Error("LifeOS database can only be accessed in the browser");
+  }
+  if (!dbInstance) {
+    dbInstance = new LifeOsDatabase();
+  }
+  return dbInstance;
+}
