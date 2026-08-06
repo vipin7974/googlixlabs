@@ -12,4 +12,5 @@ export * from "./finance";
 export * from "./book";
 export * from "./vision";
 export * from "./timer";
+export * from "./workout";
 export * from "./settings";

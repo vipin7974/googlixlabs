@@ -12,5 +12,7 @@ export * from "./useFinance";
 export * from "./useBooks";
 export * from "./useVisionBoard";
 export * from "./useDeepWork";
+export * from "./useWorkouts";
+export * from "./useElapsedTime";
 export * from "./useSettings";
 export * from "./useAnalytics";

@@ -12,6 +12,7 @@ import type { FinanceEntry } from "../types/finance";
 import type { BookEntry } from "../types/book";
 import type { VisionItem } from "../types/vision";
 import type { DeepWorkSession } from "../types/timer";
+import type { WorkoutSession } from "../types/workout";
 import type { Settings } from "../types/settings";
 
 export class LifeOsDatabase extends Dexie {
@@ -31,6 +32,7 @@ export class LifeOsDatabase extends Dexie {
   books!: Table<BookEntry, string>;
   vision_board!: Table<VisionItem, string>;
   deep_work_sessions!: Table<DeepWorkSession, string>;
+  workout_sessions!: Table<WorkoutSession, string>;
   settings!: Table<Settings, string>;
 
   constructor() {
@@ -54,6 +56,12 @@ export class LifeOsDatabase extends Dexie {
       vision_board: "id, order, category",
       deep_work_sessions: "id, date",
       settings: "id",
+    });
+
+    // Additive only: existing tables from v1 carry forward untouched: only
+    // the new workout_sessions store needs declaring here.
+    this.version(2).stores({
+      workout_sessions: "id, date, startedAt",
     });
   }
 }

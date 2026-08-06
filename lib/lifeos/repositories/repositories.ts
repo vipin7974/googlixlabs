@@ -13,6 +13,7 @@ import type { FinanceEntry } from "../types/finance";
 import type { BookEntry } from "../types/book";
 import type { VisionItem } from "../types/vision";
 import type { DeepWorkSession } from "../types/timer";
+import type { WorkoutSession } from "../types/workout";
 import { DEFAULT_SETTINGS, type Settings } from "../types/settings";
 
 export class TaskRepository extends DexieRepository<Task> {
@@ -184,6 +185,20 @@ export class DeepWorkSessionRepository extends DexieRepository<DeepWorkSession> 
   }
 }
 
+export class WorkoutSessionRepository extends DexieRepository<WorkoutSession> {
+  constructor() {
+    super(() => getLifeOsDb().workout_sessions);
+  }
+
+  async getByDate(date: string): Promise<WorkoutSession[]> {
+    return this.table.where("date").equals(date).toArray();
+  }
+
+  async getActive(): Promise<WorkoutSession | undefined> {
+    return this.table.filter((s) => s.startedAt !== null && s.endedAt === null).first();
+  }
+}
+
 export class SettingsRepository extends DexieRepository<Settings> {
   constructor() {
     super(() => getLifeOsDb().settings);
@@ -221,4 +236,5 @@ export const financeRepository = new FinanceRepository();
 export const bookRepository = new BookRepository();
 export const visionRepository = new VisionRepository();
 export const deepWorkSessionRepository = new DeepWorkSessionRepository();
+export const workoutSessionRepository = new WorkoutSessionRepository();
 export const settingsRepository = new SettingsRepository();
