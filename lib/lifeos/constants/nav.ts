@@ -54,7 +54,8 @@ export const LIFEOS_NAV: NavGroup[] = [
     label: "Growth",
     items: [
       { href: "/lifeos/learning", label: "Learning", icon: "graduation-cap" },
-      { href: "/lifeos/fitness", label: "Fitness", icon: "dumbbell" },
+      { href: "/lifeos/gym", label: "Gym Workouts", icon: "dumbbell" },
+      { href: "/lifeos/fitness", label: "Fitness", icon: "heart" },
       { href: "/lifeos/finance", label: "Finance", icon: "wallet" },
       { href: "/lifeos/books", label: "Books & Courses", icon: "library" },
     ],
