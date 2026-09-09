@@ -14,6 +14,7 @@ import type { VisionItem } from "../types/vision";
 import type { DeepWorkSession } from "../types/timer";
 import type { WorkoutSession } from "../types/workout";
 import type { Settings } from "../types/settings";
+import type { Challenge, ChallengeLog } from "../types/challenge";
 
 export class LifeOsDatabase extends Dexie {
   tasks!: Table<Task, string>;
@@ -34,6 +35,8 @@ export class LifeOsDatabase extends Dexie {
   deep_work_sessions!: Table<DeepWorkSession, string>;
   workout_sessions!: Table<WorkoutSession, string>;
   settings!: Table<Settings, string>;
+  challenges!: Table<Challenge, string>;
+  challenge_logs!: Table<ChallengeLog, string>;
 
   constructor() {
     super("lifeos");
@@ -62,6 +65,13 @@ export class LifeOsDatabase extends Dexie {
     // the new workout_sessions store needs declaring here.
     this.version(2).stores({
       workout_sessions: "id, date, startedAt",
+    });
+
+    // Additive only: fixed-duration challenge trackers (e.g. "no sugar for
+    // 30 days"), distinct from the recurring habits above.
+    this.version(3).stores({
+      challenges: "id, archived, startDate",
+      challenge_logs: "id, challengeId, date, [challengeId+date]",
     });
   }
 }

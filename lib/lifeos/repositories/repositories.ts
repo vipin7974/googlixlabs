@@ -15,6 +15,7 @@ import type { VisionItem } from "../types/vision";
 import type { DeepWorkSession } from "../types/timer";
 import type { WorkoutSession } from "../types/workout";
 import { DEFAULT_SETTINGS, type Settings } from "../types/settings";
+import type { Challenge, ChallengeLog } from "../types/challenge";
 
 export class TaskRepository extends DexieRepository<Task> {
   constructor() {
@@ -199,6 +200,31 @@ export class WorkoutSessionRepository extends DexieRepository<WorkoutSession> {
   }
 }
 
+export class ChallengeRepository extends DexieRepository<Challenge> {
+  constructor() {
+    super(() => getLifeOsDb().challenges);
+  }
+
+  async getActive(): Promise<Challenge[]> {
+    const rows = await this.table.filter((c) => !c.archived).toArray();
+    return rows.sort((a, b) => b.createdAt - a.createdAt);
+  }
+}
+
+export class ChallengeLogRepository extends DexieRepository<ChallengeLog> {
+  constructor() {
+    super(() => getLifeOsDb().challenge_logs);
+  }
+
+  async getByChallenge(challengeId: string): Promise<ChallengeLog[]> {
+    return this.table.where("challengeId").equals(challengeId).toArray();
+  }
+
+  async getByChallengeAndDate(challengeId: string, date: string): Promise<ChallengeLog | undefined> {
+    return this.table.where("[challengeId+date]").equals([challengeId, date]).first();
+  }
+}
+
 export class SettingsRepository extends DexieRepository<Settings> {
   constructor() {
     super(() => getLifeOsDb().settings);
@@ -238,3 +264,5 @@ export const visionRepository = new VisionRepository();
 export const deepWorkSessionRepository = new DeepWorkSessionRepository();
 export const workoutSessionRepository = new WorkoutSessionRepository();
 export const settingsRepository = new SettingsRepository();
+export const challengeRepository = new ChallengeRepository();
+export const challengeLogRepository = new ChallengeLogRepository();

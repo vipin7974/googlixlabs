@@ -33,6 +33,7 @@ export const LIFEOS_NAV: NavGroup[] = [
     label: "Build",
     items: [
       { href: "/lifeos/habits", label: "Habit Tracker", icon: "flame" },
+      { href: "/lifeos/challenges", label: "Day Challenges", icon: "calendar-days" },
       { href: "/lifeos/journal", label: "Journal", icon: "book-text" },
     ],
   },

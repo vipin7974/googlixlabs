@@ -50,6 +50,11 @@ export function formatDateTime(ts: number): string {
   return format(new Date(ts), "MMM d, yyyy h:mm a");
 }
 
+export function formatMonthLabel(key: string): string {
+  const [year, month] = key.split("-").map(Number);
+  return format(new Date(year, month - 1, 1), "MMMM yyyy");
+}
+
 export function lastNDayKeys(n: number, from: Date = new Date()): string[] {
   const keys: string[] = [];
   for (let i = n - 1; i >= 0; i -= 1) {

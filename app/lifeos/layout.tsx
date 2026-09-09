@@ -3,6 +3,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { LifeOsThemeProvider } from "@/lib/lifeos/context/ThemeContext";
 import { LifeOsAppGate } from "@/components/lifeos/layout/LifeOsAppGate";
 import { ServiceWorkerRegister } from "@/components/lifeos/layout/ServiceWorkerRegister";
+import { CloudSyncBoot } from "@/components/lifeos/layout/CloudSyncBoot";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -38,7 +39,10 @@ export default function LifeOsLayout({ children }: { children: React.ReactNode }
       <link rel="manifest" href="/lifeos/manifest.webmanifest" />
       <LifeOsThemeProvider>
         <ServiceWorkerRegister />
-        <LifeOsAppGate>{children}</LifeOsAppGate>
+        <LifeOsAppGate>
+          <CloudSyncBoot />
+          {children}
+        </LifeOsAppGate>
       </LifeOsThemeProvider>
     </AppRouterCacheProvider>
   );

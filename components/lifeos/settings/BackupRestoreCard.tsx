@@ -50,7 +50,7 @@ export function BackupRestoreCard() {
     <Card sx={{ p: 2.5 }}>
       <Typography sx={{ fontWeight: 700, fontSize: 15, mb: 0.5 }}>Backup & Restore</Typography>
       <Typography sx={{ fontSize: 13, color: "text.secondary", mb: 2 }}>
-        Everything lives only in this browser&apos;s storage. Export regularly so you never lose data.
+        Cloud Sync above covers most cases, but a downloaded file is the safest copy — keep one somewhere outside the browser.
       </Typography>
 
       <Box sx={{ display: "flex", gap: 1.25, flexWrap: "wrap" }}>
